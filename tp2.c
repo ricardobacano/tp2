@@ -57,12 +57,11 @@ int main (){
             printf(" DIVISAO INVALIDA\n");
             return 1;
         } else {  
+            imprime_r(sum_result);
+            imprime_r(sub_result);
+            imprime_r(multi_result);
             imprime_r(div_result);
-        }
-
-        imprime_r(sum_result);
-        imprime_r(sub_result);
-        imprime_r(multi_result);
+        };
 
         printf("\n");
     }
