@@ -31,6 +31,29 @@ int mmc (int a, int b){
     return (a * b) / mdc(a,b);
 }
 
+/* Recebe um numero racional e o retorna simplificado.
+ * Por exemplo, ao receber 10/8 devera retornar 5/4.
+ * Se ambos numerador e denominador forem negativos, devera retornar um positivo.
+ * Se o denominador for negativo, o sinal deve migrar para o numerador.
+ * Quem chama esta funcao deve garantir que o racional r eh valido */
+void simplifica_r (struct racional *r){
+
+    if (!r->valido)
+        return;
+    if (r->den == 0)
+        return;
+
+    /* calcula o mdc de ambos*/ 
+    int both_den = mdc (r->num,r->den);
+    r->num /= both_den;
+    r->den /= both_den;
+
+    /* garante que o denominador seja positivo */
+    if (r->den < 0){
+        r->num *= -1;
+        r->den *= -1;
+    }
+}
 
 /* Cria um numero racional com base nas informacoes dos parametros. */
 struct racional cria_r (int numerador, int denominador){
@@ -156,7 +179,7 @@ int divide_r (struct racional r1, struct racional r2, struct racional *r3){
     /* verifica se o numerador de r2 eh 0, se for 0 a divisao nao eh possivel*/
     if (r2.num == 0) {
         r3->valido = 0;
-        r3->num = 0;
+        r3->num = 0; 
         r3->den = 0;
         return 0;
     }
@@ -181,7 +204,7 @@ int divide_r (struct racional r1, struct racional r2, struct racional *r3){
     /* simplifica o resultado da divisao */
     int both_mdc = mdc(numerador, denominador);
     numerador /= both_mdc;
-    denominador /= both_mdc;
+    denominador /= both_mdc; 
 
     /* cria o resultado da divisao e testa se eh valido */
     *r3 = cria_r(numerador, denominador);
@@ -209,53 +232,30 @@ int compara_r (struct racional r1, struct racional r2){
         return 0;
 }
 
-/* Recebe um numero racional e o retorna simplificado.
- * Por exemplo, ao receber 10/8 devera retornar 5/4.
- * Se ambos numerador e denominador forem negativos, devera retornar um positivo.
- * Se o denominador for negativo, o sinal deve migrar para o numerador.
- * Quem chama esta funcao deve garantir que o racional r eh valido */
-void simplifica_r (struct racional *r){
-
-    if (!r->valido)
-        return;
-    if (r->den == 0)
-        return;
-
-    /* calcula o mdc de ambos*/ 
-    int both_den = mdc (r->num,r->den);
-    r->num /= both_den;
-    r->den /= both_den;
-
-    /* garante que o denominador seja posotivo */
-    if (r->den < 0){
-        r->num *= -1;
-        r->den *= -1;
-    }
-}
-
 /* Imprime um racional r*/ 
 void imprime_r (struct racional r){
     if (!r.valido){
-        printf("INVALIDO ");
+        printf(" INVALIDO");
         return;
     }
 
-    if (r.num == 0){
-        printf("0 ");
+    if (r.num == 0){ 
+        printf(" 0");
         return;
     }
     
-    if (r.num == r.den){
-        printf("1 ");
+    if (r.num == r.den){ 
+        printf(" 1");
+        return; 
+    }
+
+    /* casos em que o denominador nao precisa aparecer */
+    if (r.num % r.den == 0) { 
+        printf(" %d", r.num/r.den);
         return;
     }
 
-    if (r.num % r.den == 0) {
-        printf("%d ", r.num / r.den);
-        return;
-    }
-
-    printf("%d/%d ", r.num, r.den);
+    printf(" %d/%d", r.num, r.den);
 } 
 
 

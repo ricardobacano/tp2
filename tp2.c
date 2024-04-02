@@ -8,7 +8,7 @@
 
 int main (){
 
-    srand(0);
+    srand(4);
 
     int n, max;
 
@@ -22,22 +22,21 @@ int main (){
         scanf("%d", &max);
     } while (max < 0 || max > 30);
 
+    /* imprimir as entradas do usuario*/
     printf("%d %d\n", n,max);
 
     for (int i = 1; i <= n; i++) {
 
-        printf("%d: ", i);
+        printf("%d:", i);
 
         struct racional r1 = sorteia_r(max);
         struct racional r2 = sorteia_r(max);
 
         imprime_r(r1);
-        printf(" ");
         imprime_r(r2);
-        printf(" ");
 
         if (!valido_r(r1) || !valido_r(r2)) {
-            printf("NUMERO INVALIDO \n");
+            printf(" NUMERO INVALIDO\n");
             return 1;
         }
 
@@ -58,7 +57,7 @@ int main (){
         imprime_r(multi_result);
 
         if (!valido_r(div_result)) {
-            printf("DIVISAO INVALIDA \n");
+            printf(" DIVISAO INVALIDA\n");
             return 1;
         } else {  
             imprime_r(div_result);
