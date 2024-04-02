@@ -51,7 +51,7 @@ void simplifica_r (struct racional *r){
     /* garante que o denominador seja positivo */
     if (r->den < 0){
         r->num *= -1;
-        r->den *= -1;
+        r->den *= -1; 
     }
 }
 
@@ -69,10 +69,10 @@ struct racional cria_r (int numerador, int denominador){
 }
 
 /* Retorna um numero racional gerado aleatoriamente. */
-struct racional sorteia_r (int n){
+struct racional sorteia_r (int max){
     
-    int numerador = aleat(MINIMO,n);
-    int denominador = aleat(MINIMO,n);
+    int numerador = aleat(-max,max);
+    int denominador = aleat(-max,max);
 
     struct racional resultado = cria_r(numerador, denominador);
     simplifica_r(&resultado);

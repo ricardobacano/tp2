@@ -8,7 +8,8 @@
 
 int main (){
 
-    srand(4);
+    /* inicalizado com 0, conforme as especificacoes */
+    srand(0);
 
     int n, max;
 
@@ -52,16 +53,16 @@ int main (){
         struct racional div_result;
         divide_r(r1, r2, &div_result); 
 
-        imprime_r(sum_result);
-        imprime_r(sub_result);
-        imprime_r(multi_result);
-
         if (!valido_r(div_result)) {
             printf(" DIVISAO INVALIDA\n");
             return 1;
         } else {  
             imprime_r(div_result);
         }
+
+        imprime_r(sum_result);
+        imprime_r(sub_result);
+        imprime_r(multi_result);
 
         printf("\n");
     }
